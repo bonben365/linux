@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-YUM_PACKAGE_NAME="python python-devl python-pip openssl-devel"
-DEB_PACKAGE_NAME="python2.7 python-dev python-pip libssl-dev"
+YUM_PACKAGE_NAME="php"
+DEB_PACKAGE_NAME="php"
 
  if cat /etc/*release | grep ^NAME | grep CentOS; then
     echo "==============================================="
