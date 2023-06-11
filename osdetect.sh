@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-YUM_PACKAGE_NAME="php"
-DEB_PACKAGE_NAME="php"
+YUM_PACKAGE_NAME="update php"
+DEB_PACKAGE_NAME="update upgrade php"
 
  if cat /etc/*release | grep ^NAME | grep CentOS; then
     echo "==============================================="
