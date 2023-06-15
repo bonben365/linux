@@ -8,7 +8,9 @@ then
     cd /home
     sudo git clone https://github.com/kebe7jun/linux-kms-server
     cd /linux-kms-server/vlmcsd
-    cp vlmcsd /home && cd /home && mv vlmcsd kms
+    cp vlmcsd /home 
+    cd /home
+    sudo mv vlmcsd kms
     sudo ./kms -R170d -L 0.0.0.0:1688 -l /home/kms.log
     firewall-cmd --zone=public --add-port=1688/tcp --permanent
     echo "@reboot cd /home && sudo ./kms -R170d -L 0.0.0.0:1688 -l /home/kms.log" >> /etc/crontab
