@@ -41,7 +41,6 @@ then
   sudo sed -i 's:'\''client_id'\''\: '\'''\'',:'\''client_id'\''\: '\''66cf6639-b31d-44d9-9e6d-e5f39d79a1ef'\'',:g' /tmp/mutt_oauth2.py
   sudo sed -i 's:'\''client_secret'\''\: '\'''\'',:'\''client_secret'\''\: '\''Sqf8Q~Olte450gMpk0rmJW8DGVh6NDWwwVH~IbH8'\'',:g' /tmp/mutt_oauth2.py
   
-  python3.9 /tmp/mutt_oauth2.py token2 --verbose --authorize
 fi
 
 
