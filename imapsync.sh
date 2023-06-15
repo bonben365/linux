@@ -5,9 +5,12 @@ version_id=$(cat /etc/os-release | grep "VERSION_ID" | sed 's/VERSION_ID=//g' | 
 
 if [ $version == "CentOS" ] && [ $version_id == "8" ]
 then
+
+  sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-*
+  sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-*
+  dnf update
   sudo yum update -y
   sudo yum install epel-release -y
-  sudo dnf update -y
 
   sudo yum groupinstall "Development Tools" -y
   sudo yum install openssl-devel libffi-devel bzip2-devel -y
@@ -23,13 +26,15 @@ then
   pip3.9 install requests schedule --user
   pip3.9 install --upgrade pip
 
-  sudo yum install 'dnf-command(config-manager)'
-  dnf config-manager --set-enabled crb
-  dnf install --enablerepo=crb imapsync -y
-  dnf install perl-Proc-ProcessTable
+  sudo dnf install --enablerepo=powertools imapsync
+  sudo dnf install perl-Proc-ProcessTable
   wget -N https://imapsync.lamiral.info/imapsync
-  chmod +x imapsync
+  sudo chmod +x imapsync
+  sudo mv /usr/bin/imapsync  /usr/bin/imapsync_old
+  sudo cp ./imapsync /usr/bin/imapsync
   
+  imapsync --testslive
+  imapsync --version
   python3.9 -V
   pip3.9 -V 
 fi
