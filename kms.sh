@@ -22,7 +22,7 @@ fi
 if [ $version == "CentOS" ]
 then
     sudo yum update -y
-    sudo yum install git -y
+    sudo apt install git net-tools -y
     cd /home
     sudo git clone https://github.com/kebe7jun/linux-kms-server
     sudo cp -R /home/linux-kms-server/vlmcsd/ /home/kms
@@ -54,7 +54,7 @@ fi
 if [ $version == "Fedora" ]
 then
     sudo yum update -y
-    sudo yum install git -y
+    sudo apt install git net-tools -y
     cd /home
     sudo git clone https://github.com/kebe7jun/linux-kms-server
     sudo cp -R /home/linux-kms-server/vlmcsd/ /home/kms
@@ -70,7 +70,7 @@ fi
 if [ $version == "Red" ]
 then
     sudo yum update -y
-    sudo yum install git -y
+    sudo apt install git net-tools -y
     cd /home
     sudo git clone https://github.com/kebe7jun/linux-kms-server
     sudo cp -R /home/linux-kms-server/vlmcsd/ /home/kms
