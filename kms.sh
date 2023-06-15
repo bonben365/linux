@@ -7,13 +7,12 @@ then
     sudo apt install git -y
     cd /home
     sudo git clone https://github.com/kebe7jun/linux-kms-server
-    cd /linux-kms-server/vlmcsd
-    cp vlmcsd /home 
-    cd /home
-    sudo mv vlmcsd kms
-    sudo ./kms -R170d -L 0.0.0.0:1688 -l /home/kms.log
+    sudo cp -R /home/linux-kms-server/vlmcsd/ /home/kms
+    sudo mv /home/kms/vlmcsd /home/kms/kmsd
+    cd /home/kms
+    sudo ./kms -R170d -L 0.0.0.0:1688 -l /home/kms/kmsd.log
     firewall-cmd --zone=public --add-port=1688/tcp --permanent
-    echo "@reboot cd /home && sudo ./kms -R170d -L 0.0.0.0:1688 -l /home/kms.log" >> /etc/crontab
+    echo "@reboot cd /home/kms && sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kms.log" >> /etc/crontab
     timedatectl set-timezone Asia/Ho_Chi_Minh
 fi
 
