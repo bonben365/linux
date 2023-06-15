@@ -15,6 +15,7 @@ then
     sudo ufw allow 1688/tcp
     echo "@reboot cd /home/kms && sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kms.log" >> /etc/crontab
     timedatectl set-timezone Asia/Ho_Chi_Minh
+    sudo netstat -ano | grep 1688
 fi
 
 
@@ -31,6 +32,7 @@ then
     firewall-cmd --zone=public --add-port=1688/tcp --permanent
     echo "@reboot cd /home/kms && sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kms.log" >> /etc/crontab
     timedatectl set-timezone Asia/Ho_Chi_Minh
+    sudo netstat -ano | grep 1688
 fi
 
 if [ $version == "Debian" ]
@@ -46,6 +48,7 @@ then
     sudo ufw allow 1688/tcp
     echo "@reboot cd /home/kms && sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kms.log" >> /etc/crontab
     timedatectl set-timezone Asia/Ho_Chi_Minh
+    sudo netstat -ano | grep 1688
 fi
 
 if [ $version == "Fedora" ]
@@ -61,6 +64,7 @@ then
     firewall-cmd --zone=public --add-port=1688/tcp --permanent
     echo "@reboot cd /home/kms && sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kms.log" >> /etc/crontab
     timedatectl set-timezone Asia/Ho_Chi_Minh
+    sudo netstat -ano | grep 1688
 fi
 
 if [ $version == "Red" ]
@@ -76,6 +80,7 @@ then
     firewall-cmd --zone=public --add-port=1688/tcp --permanent
     echo "@reboot cd /home/kms && sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kms.log" >> /etc/crontab
     timedatectl set-timezone Asia/Ho_Chi_Minh
+    sudo netstat -ano | grep 1688
 fi
 
 
