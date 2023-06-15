@@ -8,13 +8,11 @@ then
 
   sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-*
   sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-*
-  dnf update
-  sudo yum update -y
-  sudo yum install epel-release -y
+  sud dnf update -y
+  sudo dnf install epel-release -y
 
   sudo yum groupinstall "Development Tools" -y
   sudo yum install openssl-devel libffi-devel bzip2-devel -y
-  sudo yum install wget -y
   wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz
   tar xvf Python-*.tgz
   cd Python-3.9*/
@@ -26,8 +24,9 @@ then
   pip3.9 install requests schedule --user
   pip3.9 install --upgrade pip
 
-  sudo dnf install --enablerepo=powertools imapsync
-  sudo dnf install perl-Proc-ProcessTable
+  cd /
+  sudo dnf install --enablerepo=powertools imapsync -y
+  sudo dnf install perl-Proc-ProcessTable -y
   wget -N https://imapsync.lamiral.info/imapsync
   sudo chmod +x imapsync
   sudo mv /usr/bin/imapsync  /usr/bin/imapsync_old
