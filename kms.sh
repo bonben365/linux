@@ -83,6 +83,25 @@ then
     sudo netstat -ano | grep 1688
 fi
 
+if [ $version == "Alpine" ]
+then
+    cd /home
+    git clone https://github.com/Wind4/vlmcsd
+    cd vlmcsd
+    make
+    cp /home/vlmcsd/bin/vlmcsd /home/kmsd
+    echo 'name="kmsd"' >> /etc/init.d/kmsd
+    echo 'pidfile="/run/$RC_SVCNAME.pid"' >> /etc/init.d/kmsd
+    echo 'command="/home/kmsd"' >> /etc/init.d/kmsd
+    echo 'command_args="-p $pidfile -v -l /home/kmsd.log"' >> /etc/init.d/kmsd
+    echo 'depend() {need net' >> /etc/init.d/kmsd
+    echo '}' >> /etc/init.d/kmsd
+    chmod +x /etc/init.d/kmsd
+    rc-update add kmsd
+    /etc/init.d/kmsd start
+    netstat -ano | grep 1688
+fi
+
 
 
 
