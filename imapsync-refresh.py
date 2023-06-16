@@ -3,7 +3,7 @@ import json
 import schedule
 import time
 
-auth = ("574c8af6-4607-4dc9-a7d0-c69c1068e0f4", "nFV8Q~z~UY~6t4gPnXqWGJTcUdh4QuPCdyjwGb6a")
+auth = ("client_id", "client_secret")
 url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 
 params = {
