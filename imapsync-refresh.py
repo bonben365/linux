@@ -9,7 +9,7 @@ url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 params = {
   "grant_type":"refresh_token",
   "scope":"https://outlook.office365.com/.default",
-  "refresh_token":"access_token"
+  "refresh_token":"token"
 }
 
 def job():
