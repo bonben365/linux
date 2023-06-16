@@ -20,7 +20,7 @@ def job():
     with  open("token.txt", "w") as f:
         f.write(str(access_key['access_token']))
 
-schedule.every(30).minutes.do(job)
+schedule.every(1).minutes.do(job)
 schedule.every().hour.do(job)
 schedule.every().day.at("10:30").do(job)
 
