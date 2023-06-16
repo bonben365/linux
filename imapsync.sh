@@ -31,8 +31,7 @@ then
   sudo mv /usr/bin/imapsync  /usr/bin/imapsync_old
   sudo cp ./imapsync /usr/bin/imapsync
   
-  cd /home
-  sudo mkdir imapsync && cd imapsync
+  sudo mkdir /home/imapsync && cd /home/imapsync
   wget https://gitlab.com/muttmua/mutt/-/raw/master/contrib/mutt_oauth2.py
   sudo sed -i 's:DECRYPTION_PIPE = \['\''gpg'\'', '\''--decrypt'\''\]:DECRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
@@ -40,6 +39,8 @@ then
   
   sudo sed -i 's:'\''client_id'\''\: '\'''\'',:'\''client_id'\''\: '\''66cf6639-b31d-44d9-9e6d-e5f39d79a1ef'\'',:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:'\''client_secret'\''\: '\'''\'',:'\''client_secret'\''\: '\''Sqf8Q~Olte450gMpk0rmJW8DGVh6NDWwwVH~IbH8'\'',:g' /home/imapsync/mutt_oauth2.py
+  
+  
   
 fi
 
