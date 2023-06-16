@@ -44,15 +44,16 @@ then
 
   sudo yum -y update
   sudo yum install -y make gcc perl-core pcre-devel wget zlib-devel
-  wget https://ftp.openssl.org/source/openssl-1.1.1k.tar.gz
-  sudo tar -xzvf openssl-1.1.1k.tar.gz
-  cd openssl-1.1.1k
+  wget wget https://ftp.openssl.org/source/openssl-3.1.1.tar.gz
+  sudo tar -xzvf openssl-3*.tar.gz
+  cd openssl-3*
   ./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib no-shared zlib-dynamic
   sudo make -j ${nproc} 
   sudo make test
   sudo make install -j ${nproc} 
   echo "export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64" >> /etc/profile.d/openssl.sh
   source /etc/profile.d/openssl.sh
+  openssl version
 
   sudo yum groupinstall "Development Tools" -y
   sudo yum install libffi-devel bzip2-devel -y
