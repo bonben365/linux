@@ -3,6 +3,71 @@
 version=$(cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
 version_id=$(cat /etc/os-release | grep "VERSION_ID" | sed 's/VERSION_ID=//g' | sed 's/["]//g' | awk '{print $1}')
 
+
+if [ $version == "CentOS" ] && [ $version_id == "7" ]
+then
+
+  sudo yum update -y
+  sudo yum install epel-release -y
+
+  sudo yum install imapsync -y
+
+  sudo yum install perl-App-cpanminus \
+      perl-Dist-CheckConflicts \
+      perl-HTML-Parser \
+      perl-libwww-perl \
+      perl-Module-Implementation \
+      perl-Module-ScanDeps \
+      perl-Package-Stash \
+      perl-Package-Stash-XS \
+      perl-PAR-Packer \
+      perl-Regexp-Common \
+      perl-Sys-MemInfo \
+      perl-Test-Fatal \
+      perl-Test-Mock-Guard \
+      perl-Test-Requires \
+      perl-Test-Deep \
+      perl-File-Tail \
+      perl-Unicode-String \
+      perl-Test-NoWarnings \
+      perl-Test-Simple \
+      perl-Test-Warn \
+      perl-Sub-Uplevel \
+      perl-Proc-ProcessTable \
+      ca-certificates -y
+
+  wget -N https://imapsync.lamiral.info/imapsync
+  chmod +x imapsync
+  sudo mv /usr/bin/imapsync  /usr/bin/imapsync_old
+  sudo cp ./imapsync /usr/bin/imapsync
+  cpanm Encode::IMAPUTF7 
+
+
+  sudo yum groupinstall "Development Tools" -y
+  sudo yum install openssl-devel libffi-devel bzip2-devel -y
+  wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz
+  tar xvf Python-*.tgz
+  cd Python-3.9*/
+  sudo ./configure --with-system-ffi --with-computed-gotos --enable-loadable-sqlite-extensions 
+  sudo make -j ${nproc} 
+  sudo make altinstall
+  sudo rm ../Python-3.9.16.tgz -f 
+  /usr/local/bin/python3.9 -m pip install --upgrade pip
+  pip3.9 install requests schedule --user
+  pip3.9 install --upgrade pip
+  
+  sudo mkdir /home/imapsync && cd /home/imapsync
+  wget https://gitlab.com/muttmua/mutt/-/raw/master/contrib/mutt_oauth2.py
+  sudo sed -i 's:DECRYPTION_PIPE = \['\''gpg'\'', '\''--decrypt'\''\]:DECRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
+  sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
+  sudo sed -i 's:https\:\/\/login.microsoftonline.com\/common\/oauth2\/nativeclient:http\:\/\/localhost\/:g' /home/imapsync/mutt_oauth2.py
+  
+  sudo sed -i "s|'client_id': '',|'client_id': '$client_id',|g" /home/imapsync/mutt_oauth2.py
+  sudo sed -i "s|'client_secret': '',|'client_secret': '$client_secret',|g" /home/imapsync/mutt_oauth2.py
+  
+fi
+
+
 if [ $version == "CentOS" ] && [ $version_id == "8" ]
 then
 
@@ -126,25 +191,6 @@ then
     echo "@reboot cd /home/kms && sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kms.log" >> /etc/crontab
     timedatectl set-timezone Asia/Ho_Chi_Minh
     sudo netstat -ano | grep 1688
-fi
-
-if [ $version == "Alpine" ]
-then
-    cd /home
-    git clone https://github.com/Wind4/vlmcsd
-    cd vlmcsd
-    make
-    cp /home/vlmcsd/bin/vlmcsd /home/kmsd
-    echo 'name="kmsd"' >> /etc/init.d/kmsd
-    echo 'pidfile="/run/$RC_SVCNAME.pid"' >> /etc/init.d/kmsd
-    echo 'command="/home/kmsd"' >> /etc/init.d/kmsd
-    echo 'command_args="-p $pidfile -v -l /home/kmsd.log"' >> /etc/init.d/kmsd
-    echo 'depend() {need net' >> /etc/init.d/kmsd
-    echo '}' >> /etc/init.d/kmsd
-    chmod +x /etc/init.d/kmsd
-    rc-update add kmsd
-    /etc/init.d/kmsd start
-    netstat -ano | grep 1688
 fi
 
 
