@@ -19,7 +19,7 @@ then
   sudo ./configure --with-system-ffi --with-computed-gotos --enable-loadable-sqlite-extensions 
   sudo make -j ${nproc} 
   sudo make altinstall
-  sudo rm Python-3.9.16.tgz 
+  sudo rm ../Python-3.9.16.tgz -f 
   /usr/local/bin/python3.9 -m pip install --upgrade pip
   pip3.9 install requests schedule --user
   pip3.9 install --upgrade pip
@@ -48,20 +48,21 @@ then
   sudo dnf update -y
   sudo dnf install epel-release -y
 
-  sudo yum groupinstall "Development Tools" -y
-  sudo yum install openssl-devel libffi-devel bzip2-devel -y
+  sudo dnf groupinstall "Development Tools" -y
+  sudo dnf install openssl-devel libffi-devel bzip2-devel -y
   wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz
   tar xvf Python-*.tgz
   cd Python-3.9*/
   sudo ./configure --with-system-ffi --with-computed-gotos --enable-loadable-sqlite-extensions 
   sudo make -j ${nproc} 
   sudo make altinstall
-  sudo rm Python-3.9.16.tgz 
+  sudo rm ../Python-3.9.16.tgz -f 
   /usr/local/bin/python3.9 -m pip install --upgrade pip
   pip3.9 install requests schedule --user
   pip3.9 install --upgrade pip
 
-  sudo dnf install --enablerepo=powertools imapsync -y
+  sudo dnf config-manager --set-enabled crb
+  sudo dnf install imapsync -y
   sudo dnf install perl-Proc-ProcessTable -y
   wget -N https://imapsync.lamiral.info/imapsync
   sudo chmod +x imapsync
