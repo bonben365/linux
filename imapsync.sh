@@ -37,10 +37,8 @@ then
   sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:https\:\/\/login.microsoftonline.com\/common\/oauth2\/nativeclient:http\:\/\/localhost\/:g' /home/imapsync/mutt_oauth2.py
   
-  sudo sed -i 's:'\''client_id'\''\: '\'''\'',:'\''client_id'\''\: '\''66cf6639-b31d-44d9-9e6d-e5f39d79a1ef'\'',:g' /home/imapsync/mutt_oauth2.py
-  sudo sed -i 's:'\''client_secret'\''\: '\'''\'',:'\''client_secret'\''\: '\''Sqf8Q~Olte450gMpk0rmJW8DGVh6NDWwwVH~IbH8'\'',:g' /home/imapsync/mutt_oauth2.py
-  
-  
+  sudo sed -i "s@'\''client_id'\''\: '\'''\'',@'\''client_id'\''\: '\''$client_id'\'',@g" /home/imapsync/mutt_oauth2.py
+  sudo sed -i "s@'\''client_secret'\''\: '\'''\'',@'\''client_secret'\''\: '\''$client_secret'\'',@g" /home/imapsync/mutt_oauth2.py
   
 fi
 
