@@ -17,10 +17,10 @@ def job():
     print(ret.text.encode('utf8'))
     access_key = ret.json()
     
-    with  open("TOKEN.txt", "w") as f:
+    with  open("token.txt", "w") as f:
         f.write(str(access_key['access_token']))
 
-schedule.every(50).minutes.do(job)
+schedule.every(30).minutes.do(job)
 schedule.every().hour.do(job)
 schedule.every().day.at("10:30").do(job)
 
