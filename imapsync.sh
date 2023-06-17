@@ -72,7 +72,7 @@ then
   pip3.9 install --upgrade pip
   
   cd /home/imapsync
-  wget https://gitlab.com/muttmua/mutt/-/raw/master/contrib/mutt_oauth2.py
+  wget https://raw.githubusercontent.com/bonben365/linux/main/mutt_oauth2.py
   sudo sed -i 's:DECRYPTION_PIPE = \['\''gpg'\'', '\''--decrypt'\''\]:DECRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:https\:\/\/login.microsoftonline.com\/common\/oauth2\/nativeclient:http\:\/\/localhost\/:g' /home/imapsync/mutt_oauth2.py
@@ -112,13 +112,13 @@ then
   sudo cp ./imapsync /usr/bin/imapsync
   
   cd /home/imapsync
-  wget https://gitlab.com/muttmua/mutt/-/raw/master/contrib/mutt_oauth2.py
+  wget https://raw.githubusercontent.com/bonben365/linux/main/mutt_oauth2.py
   sudo sed -i 's:DECRYPTION_PIPE = \['\''gpg'\'', '\''--decrypt'\''\]:DECRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:https\:\/\/login.microsoftonline.com\/common\/oauth2\/nativeclient:http\:\/\/localhost\/:g' /home/imapsync/mutt_oauth2.py
   
-  sudo sed -i "s|'client_id': '',|'client_id': '$client_id',|g" /home/imapsync/mutt_oauth2.py
-  sudo sed -i "s|'client_secret': '',|'client_secret': '$client_secret',|g" /home/imapsync/mutt_oauth2.py
+  sudo sed -i "s|YOUR_CLIENT_ID|$client_idx|g" /home/imapsync/mutt_oauth2.py
+  sudo sed -i "s|YOUR_CLIENT_SECRET|$client_secretx|g" /home/imapsync/mutt_oauth2.py
   
 fi
 
@@ -150,7 +150,7 @@ then
   sudo cp ./imapsync /usr/bin/imapsync
   
   sudo mkdir /home/imapsync && cd /home/imapsync
-  wget https://gitlab.com/muttmua/mutt/-/raw/master/contrib/mutt_oauth2.py
+  wget https://raw.githubusercontent.com/bonben365/linux/main/mutt_oauth2.py
   sudo sed -i 's:DECRYPTION_PIPE = \['\''gpg'\'', '\''--decrypt'\''\]:DECRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:https\:\/\/login.microsoftonline.com\/common\/oauth2\/nativeclient:http\:\/\/localhost\/:g' /home/imapsync/mutt_oauth2.py
