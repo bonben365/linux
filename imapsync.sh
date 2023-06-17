@@ -2,6 +2,9 @@
 
 version=$(cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
 version_id=$(cat /etc/os-release | grep "VERSION_ID" | sed 's/VERSION_ID=//g' | sed 's/["]//g' | awk '{print $1}')
+client_idx="$(cat /home/imapsync/client_id.txt)"
+client_secretx="$(cat /home/imapsync/client_secret.txt)"
+
 
 
 if [ $version == "CentOS" ] && [ $version_id == "7" ]
@@ -68,14 +71,14 @@ then
   pip3.9 install requests schedule --user
   pip3.9 install --upgrade pip
   
-  sudo mkdir /home/imapsync && cd /home/imapsync
+  cd /home/imapsync
   wget https://gitlab.com/muttmua/mutt/-/raw/master/contrib/mutt_oauth2.py
   sudo sed -i 's:DECRYPTION_PIPE = \['\''gpg'\'', '\''--decrypt'\''\]:DECRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:https\:\/\/login.microsoftonline.com\/common\/oauth2\/nativeclient:http\:\/\/localhost\/:g' /home/imapsync/mutt_oauth2.py
   
-  sudo sed -i "s|'client_id': '',|'client_id': '\''$client_id'\'',|g" /home/imapsync/mutt_oauth2.py
-  sudo sed -i "s|'client_secret': '',|'client_secret': '\''$client_secret'\'',|g" /home/imapsync/mutt_oauth2.py
+  sudo sed -i "s|YOUR_CLIENT_ID|$client_idx|g" /home/imapsync/mutt_oauth2.py
+  sudo sed -i "s|YOUR_CLIENT_SECRET|$client_secretx|g" /home/imapsync/mutt_oauth2.py
   
 fi
 
