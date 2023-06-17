@@ -111,7 +111,7 @@ then
   sudo mv /usr/bin/imapsync  /usr/bin/imapsync_old
   sudo cp ./imapsync /usr/bin/imapsync
   
-  sudo mkdir /home/imapsync && cd /home/imapsync
+  cd /home/imapsync
   wget https://gitlab.com/muttmua/mutt/-/raw/master/contrib/mutt_oauth2.py
   sudo sed -i 's:DECRYPTION_PIPE = \['\''gpg'\'', '\''--decrypt'\''\]:DECRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
   sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
