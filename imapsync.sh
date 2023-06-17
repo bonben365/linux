@@ -82,20 +82,69 @@ then
   sudo sed -i "s|YOUR_CLIENT_SECRET|$client_secretx|g" /home/imapsync/mutt_oauth2.py
 fi
 
-if [ $version == "Debian" ]
+if [ $version == "Ubuntu" ]
 then
-    sudo apt update -y && sudo apt upgrade -y
-    sudo apt install git net-tools -y
-    cd /home
-    sudo git clone https://github.com/kebe7jun/linux-kms-server
-    sudo cp -R /home/linux-kms-server/vlmcsd/ /home/kms
-    sudo mv /home/kms/vlmcsd /home/kms/kmsd
-    cd /home/kms
-    sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kmsd.log
-    sudo ufw allow 1688/tcp
-    echo "@reboot cd /home/kms && sudo ./kmsd -R170d -L 0.0.0.0:1688 -l /home/kms/kms.log" >> /etc/crontab
-    timedatectl set-timezone Asia/Ho_Chi_Minh
-    sudo netstat -ano | grep 1688
+  sudo apt-get install  \
+    libauthen-ntlm-perl     \
+    libclass-load-perl      \
+    libcrypt-openssl-rsa-perl \
+    libcrypt-ssleay-perl    \
+    libdata-uniqid-perl     \
+    libdigest-hmac-perl     \
+    libdist-checkconflicts-perl \
+    libencode-imaputf7-perl     \
+    libfile-copy-recursive-perl \
+    libfile-tail-perl       \
+    libio-compress-perl     \
+    libio-socket-inet6-perl \
+    libio-socket-ssl-perl   \
+    libio-tee-perl          \
+    libjson-webtoken-perl   \
+    libmail-imapclient-perl \
+    libmodule-scandeps-perl \
+    libnet-dbus-perl        \
+    libnet-ssleay-perl      \
+    libpar-packer-perl      \
+    libproc-processtable-perl \
+    libreadonly-perl        \
+    libregexp-common-perl   \
+    libsys-meminfo-perl     \
+    libterm-readkey-perl    \
+    libtest-fatal-perl      \
+    libtest-mock-guard-perl \
+    libtest-mockobject-perl \
+    libtest-pod-perl        \
+    libtest-requires-perl   \
+    libtest-simple-perl     \
+    libunicode-string-perl  \
+    liburi-perl             \
+    libtest-nowarnings-perl \
+    libtest-deep-perl       \
+    libtest-warn-perl       \
+    make                    \
+    cpanminus \
+    time -y
+
+  sudo cpanm Mail::IMAPClient
+  wget -N https://raw.githubusercontent.com/imapsync/imapsync/master/imapsync
+  sudo chmod +x imapsync
+  sudo cp imapsync /usr/bin/
+
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.9 -y
+
+
+  cd /home/imapsync
+  wget https://raw.githubusercontent.com/bonben365/linux/main/mutt_oauth2.py
+  sudo sed -i 's:DECRYPTION_PIPE = \['\''gpg'\'', '\''--decrypt'\''\]:DECRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
+  sudo sed -i 's:ENCRYPTION_PIPE = \['\''gpg'\'', '\''--encrypt'\'', '\''--recipient'\'', '\''YOUR_GPG_IDENTITY'\''\]:ENCRYPTION_PIPE = \['\''tee'\''\]:g' /home/imapsync/mutt_oauth2.py
+  sudo sed -i 's:https\:\/\/login.microsoftonline.com\/common\/oauth2\/nativeclient:http\:\/\/localhost\/:g' /home/imapsync/mutt_oauth2.py
+  
+  sudo sed -i "s|YOUR_CLIENT_ID|$client_idx|g" /home/imapsync/mutt_oauth2.py
+  sudo sed -i "s|YOUR_CLIENT_SECRET|$client_secretx|g" /home/imapsync/mutt_oauth2.py
+
+
 fi
 
 if [ $version == "Fedora" ]
