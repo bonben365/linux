@@ -132,8 +132,15 @@ then
 
   sudo apt install software-properties-common -y
   sudo add-apt-repository ppa:deadsnakes/ppa
+<<<<<<< Updated upstream
   sudo apt install python3.9 -y
 
+=======
+  sudo apt update -y
+  sudo apt install python3 -y
+  pip3 install requests schedule --user
+  pip3 install --upgrade pip
+>>>>>>> Stashed changes
 
   cd /home/imapsync
   wget https://raw.githubusercontent.com/bonben365/linux/main/mutt_oauth2.py
