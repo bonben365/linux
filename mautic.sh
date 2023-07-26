@@ -9,6 +9,8 @@ LC_ALL=C.UTF-8 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update -y
 sudo apt install -y php7.4
 sudo apt install php7.4-{cli,fpm,json,common,mysql,zip,gd,mbstring,curl,xml,bcmath,imap,intl} -y
+sudo sed -i 's/memory_limit = 128M/memory_limit = 512M/g' /etc/php/7.4/fpm/php.ini
+sudo sed -i 's/;date.timezone =/date.timezone = America\/New_York/g' /etc/php/7.4/fpm/php.ini
 
 sudo apt install mariadb-server mariadb-client -y
 sudo systemctl start mariadb && sudo systemctl enable mariadb
