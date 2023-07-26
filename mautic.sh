@@ -17,9 +17,12 @@ sudo systemctl start php7.4-fpm && sudo systemctl enable php7.4-fpm
 
 #Download Mautic
 cd /var/www/
-wget https://github.com/mautic/mautic/releases/download/4.4.9/4.4.9.zip
+LATEST_RELEASE=$(curl -L -s -H 'Accept: application/json' https://github.com/mautic/mautic/releases/latest)
+LATEST_VERSION=$(echo $LATEST_RELEASE | sed -e 's/.*"tag_name":"\([^"]*\)".*/\1/')
+ARTIFACT_URL="https://github.com/mautic/mautic/releases/download/$LATEST_VERSION/$LATEST_VERSION.zip"
+wget $ARTIFACT_URL
 sudo mkdir -p /var/www/mautic/
-sudo unzip 4.*.zip -d /var/www/mautic/
+sudo unzip "$LATEST_VERSION.zip" -d /var/www/mautic/
 sudo chown -R www-data:www-data /var/www/mautic
 
 #Generate SSL Letsencrypt
