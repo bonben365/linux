@@ -31,7 +31,7 @@ sudo chmod -R 755 /var/www/mautic/
 
 #Generate SSL Letsencrypt
 sudo apt install certbot -y
-sudo apt install python3-certbot-apache -y
+sudo apt install python3-certbot-nginx -y
 
 
 
