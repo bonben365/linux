@@ -23,6 +23,9 @@ wget $ARTIFACT_URL
 sudo mkdir -p /var/www/mautic/
 sudo unzip "$LATEST_VERSION.zip" -d /var/www/mautic/
 
+sudo mkdir -p /var/www/mautic/.well-known/acme-challenge
+sudo chown www-data:www-data /var/www/mautic/.well-known/acme-challenge
+
 sudo chown -R www-data:www-data /var/www/mautic/
 sudo chmod -R 755 /var/www/mautic/
 
