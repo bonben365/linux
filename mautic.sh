@@ -33,7 +33,7 @@ sudo apt install certbot -y
 sudo apt install python3-certbot-nginx -y
 
 sudo apt remove apache2 -y
-sudo wget https://raw.githubusercontent.com/bonben365/linux/main/mautic.conf -P /etc/nginx/sites-enabled/
+sudo wget https://raw.githubusercontent.com/bonben365/linux/main/mautic.conf -P /etc/nginx/conf.d/
 
 
 
