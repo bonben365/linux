@@ -12,6 +12,7 @@ sudo apt update -y
 sudo apt install -y php7.4
 sudo apt install php7.4-{cli,fpm,json,common,mysql,zip,gd,mbstring,curl,xml,bcmath,imap,intl} -y
 
+sudo apt remove apache2 -y
 sudo apt install nginx unzip -y
 
 sudo apt install mariadb-server mariadb-client -y
