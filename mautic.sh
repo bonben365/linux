@@ -8,13 +8,16 @@ sudo iptables -I INPUT -p tcp --dport 443 -j ACCEPT
 sudo apt install mariadb-server mariadb-client -y
 sudo systemctl start mariadb && sudo systemctl enable mariadb
 
-sudo apt install php8.1 php8.1-fpm php8.1-mysql php-common php8.1-cli php8.1-common php8.1-opcache php8.1-readline php8.1-mbstring php8.1-xml php8.1-gd php8.1-curl -y
+#Installing PHP on Ubuntu
+sudo apt install software-properties-common ca-certificates lsb-release apt-transport-https -y
+LC_ALL=C.UTF-8 sudo add-apt-repository ppa:ondrej/php -y
 
-sudo systemctl start php8.1-fpm && sudo systemctl enable php8.1-fpm
+sudo apt install php7.4 php7.4-fpm php7.4-mysql php-common php7.4-cli php7.4-common php7.4-opcache php7.4-readline php7.4-mbstring php7.4-xml php7.4-gd php7.4-curl -y
+sudo systemctl start php7.4-fpm && sudo systemctl enable php7.4-fpm
 
+#Download Mautic
 cd /var/www/
 wget https://github.com/mautic/mautic/releases/download/4.4.9/4.4.9.zip
-
 sudo mkdir -p /var/www/mautic/
 sudo unzip 4.*.zip -d /var/www/mautic/
 sudo chown -R www-data:www-data /var/www/mautic
