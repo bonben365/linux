@@ -13,9 +13,10 @@ sudo apt install php8.1 php8.1-fpm php8.1-mysql php-common php8.1-cli php8.1-com
 sudo systemctl start php8.1-fpm && sudo systemctl enable php8.1-fpm
 
 cd /var/www/
-wget -q https://www.mautic.org/download/latest
+wget https://github.com/mautic/mautic/releases/download/4.4.9/4.4.9.zip
 
-unzip -qq latest -d mautic
+sudo mkdir -p /var/www/mautic/
+sudo unzip 4.*.zip -d /var/www/mautic/
 sudo chown -R www-data:www-data /var/www/mautic
 
 #Generate SSL Letsencrypt
