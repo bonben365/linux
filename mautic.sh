@@ -1,9 +1,4 @@
 sudo apt update -y
-sudo apt install nginx unzip -y
-systemctl start nginx && systemctl enable nginx
-sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-sudo iptables -I INPUT -p tcp --dport 443 -j ACCEPT
-
 
 sudo apt install mariadb-server mariadb-client -y
 sudo systemctl start mariadb && sudo systemctl enable mariadb
@@ -12,7 +7,11 @@ sudo systemctl start mariadb && sudo systemctl enable mariadb
 sudo apt install software-properties-common ca-certificates lsb-release apt-transport-https -y
 LC_ALL=C.UTF-8 sudo add-apt-repository ppa:ondrej/php -y
 
-sudo apt install php7.4 php7.4-fpm php7.4-mysql php-common php7.4-cli php7.4-common php7.4-opcache php7.4-readline php7.4-mbstring php7.4-xml php7.4-gd php7.4-curl -y
+sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -I INPUT -p tcp --dport 443 -j ACCEPT
+
+sudo apt install apache2 libapache2-mod-php7.4 php7.4 unzip php7.4-xml php7.4-mysql php7.4-imap php7.4-zip php7.4-intl php7.4-curl php7.4-gd php7.4-mbstring php7.4-bcmath ntp -y
+
 sudo systemctl start php7.4-fpm && sudo systemctl enable php7.4-fpm
 
 #Download Mautic
