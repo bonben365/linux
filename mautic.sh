@@ -10,7 +10,7 @@ LC_ALL=C.UTF-8 sudo add-apt-repository ppa:ondrej/php -y
 sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 sudo iptables -I INPUT -p tcp --dport 443 -j ACCEPT
 
-sudo apt install apache2 libapache2-mod-php7.4 php7.4 unzip php7.4-xml php7.4-mysql php7.4-imap php7.4-zip php7.4-intl php7.4-curl php7.4-gd php7.4-mbstring php7.4-bcmath ntp -y
+sudo apt install nginx unzip php7.4-xml php7.4-mysql php7.4-imap php7.4-zip php7.4-intl php7.4-curl php7.4-gd php7.4-mbstring php7.4-bcmath ntp -y
 
 sudo systemctl start php7.4-fpm && sudo systemctl enable php7.4-fpm
 
