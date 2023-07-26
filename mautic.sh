@@ -22,7 +22,9 @@ ARTIFACT_URL="https://github.com/mautic/mautic/releases/download/$LATEST_VERSION
 wget $ARTIFACT_URL
 sudo mkdir -p /var/www/mautic/
 sudo unzip "$LATEST_VERSION.zip" -d /var/www/mautic/
-sudo chown -R www-data:www-data /var/www/mautic
+
+sudo chown -R www-data:www-data /var/www/mautic/
+sudo chmod -R 755 /var/www/mautic/
 
 #Generate SSL Letsencrypt
 sudo apt install certbot -y
