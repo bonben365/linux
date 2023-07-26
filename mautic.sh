@@ -19,4 +19,6 @@ unzip -qq latest -d mautic
 sudo chown -R www-data:www-data /var/www/mautic
 
 #Generate SSL Letsencrypt
-sudo apt install certbot
+sudo apt install certbot -y 
+
+
