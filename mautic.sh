@@ -25,6 +25,7 @@ sudo unzip "$LATEST_VERSION.zip" -d /var/www/mautic/
 sudo chown -R www-data:www-data /var/www/mautic
 
 #Generate SSL Letsencrypt
-sudo apt install certbot -y 
+#sudo apt install certbot -y
+sudo install python-certbot-apache -y
 
 
