@@ -1,3 +1,10 @@
+#!/bin/bash
+
+version=$(cat /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
+version_id=$(cat /etc/os-release | grep "VERSION_ID" | sed 's/VERSION_ID=//g' | sed 's/["]//g' | awk '{print $1}')
+
+if [ $version == "Ubuntu" ]
+then
 #Install and configure LEMP
 sudo apt update -y
 sudo apt install nginx unzip -y
@@ -38,6 +45,9 @@ sudo apt install python3-certbot-nginx -y
 
 sudo apt remove apache2 -y
 sudo wget https://raw.githubusercontent.com/bonben365/linux/main/mautic.conf -P /etc/nginx/conf.d/
+fi
+
+
 
 
 
