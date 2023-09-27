@@ -29,7 +29,7 @@ sudo dnf module -y install php:remi-7.4
 sudo dnf install -y wget php php-pear php-cgi php-common php-curl php-mbstring php-gd php-mysqlnd php-gettext php-bcmath php-zip php-xml php-json php-process php-snmp
 sudo pear install Console_Getopt
 
-sudo firewall-cmd --add-port={80,443} --permanent
+sudo firewall-cmd --add-port={80,443}/tcp --permanent
 sudo firewall-cmd --reload
 
 sudo sed -i 's/\(^upload_max_filesize = \).*/\l20M/' /etc/php.ini
